@@ -7,6 +7,10 @@ public class MapGenerator {
 	public int map [][];
 	public int brickWidth;
 	public int brickHeight;
+	public int[][] mapColor = {{0, 1, 2, 3, 2, 1, 0, 1, 2}, //0: pink, 1: blue, 2: red, 3:orange 4:black
+							    {0, 1, 2, 3, 2, 1, 0, 1, 2},  //black은 못깨는 블럭
+							    {0, 1, 2, 3, 2, 1, 0, 1, 2},  
+							    {0, 1, 4, 3, 2, 1, 4, 1, 2}};
 	
 	public MapGenerator(int row, int col) { //블럭 생성
 		map = new int [row][col];
@@ -24,7 +28,23 @@ public class MapGenerator {
 		for (int i = 0; i < map.length; i++) {
 			for (int j=0; j< map[0].length;j++) {
 				if(map[i][j] > 0) { //map[i][j]이 0보다 클때 블럭 위치와 크기 설정
-					g.setColor(Color.black);
+					switch(mapColor[i][j]) {
+			        case 0: 
+			            g.setColor(Color.pink);
+			            break;
+			        case 1: 
+			        	g.setColor(Color.blue);
+			            break; 
+			        case 2:
+			        	g.setColor(Color.red);
+			            break;
+			        case 3:
+			        	g.setColor(Color.orange);
+			            break;
+			        default: 
+			        	g.setColor(Color.black);
+			            break;
+					}
 					g.fillRect(j*brickWidth + 80, i*brickHeight + 50, brickWidth, brickHeight);
 					
 					g.setStroke(new BasicStroke(3)); //블럭 외각선 설정
